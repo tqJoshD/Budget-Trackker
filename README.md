@@ -9,69 +9,71 @@ Welcome to GDB Online.
 #include <iostream>
 #include <string>
 using namespace std;
+
 int TotalAllowance = 0;
 
 int foodEX = 0;
-int fairEX = 0;
+int fareEX = 0;
 int schoolEX = 0;
 int funEX = 0;
 int miscEX = 0;
 
 int food();
-int fair();
+int fare();
 int school();
 int fun();
 int misc();
 
 int foodExpenses[7];
-int fairExpenses[7];
+int fareExpenses[7];
 int schoolExpenses[7];
 int funExpenses[7];
 int miscExpenses[7];
 
 string week[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-int WeeklyAllowance() {
+int WeeklyAllowance(){
 	int weeklyallowance, choicesWA, whatif;
 
 	cout << "Enter your Weekly Allowance:";
 	cin >> weeklyallowance;
 	TotalAllowance += weeklyallowance;
-	cout <<"Your weekly allowance is:" << weeklyallowance << endl << "Return to features? (Press 1 - Yes, 0 - No )";
+	cout <<"Your weekly allowance is:" << weeklyallowance << endl << "Return to features? (Press 1 - Yes, 2 - No ):\n";
 	cin >> choicesWA;
-
-	if (choicesWA == 1)
-		return 1;
-	else if (choicesWA == 0) {
-		int choicevg;
-		cout << "Do you want to add an allowance? (1 - yes, 0 - no)\n";
-		cin >> choicevg;
-		if (choicevg == 1) {
-			cout << "Add more allowance:\n";
-			cin >> whatif;
-			TotalAllowance += whatif;
-			cout << "Your allowance is now " << TotalAllowance << endl;
-		}
-		else if (choicevg == 0) {
-			return 1;
-		}
-		else if (choicesWA != 1 && choicesWA != 0) {
-			cout << "You have entered a wrong number, your laptop is now corrupted jk. \n Going back to the main interface...\n";
-			return 1;
-		}
-		return 0;
-	}
+        switch (choicesWA) {
+            case 1: 
+                return 1;
+            break;
+            case 2:{
+                int choicevg;
+		        cout << "Do you want to add an allowance? (1 - yes, 2 - no):\n";
+		        cin >> choicevg;
+		            if (choicevg == 1) {
+			            cout << "Add more allowance:\n";
+			            cin >> whatif;
+			            TotalAllowance += whatif;
+			            cout << "Your allowance is now " << TotalAllowance << endl;
+			            return 1;
+			            break;
+		                }
+		               else if (choicevg == 2) {
+    			            return 1;}}
+            default:{
+		        cout << "Invalid choice! Please enter a number (1 - yes, 2 - no): \n";}}
+    return 0;
 }
-int InputAllowance() {
+		        
+
+int InputAllowance(){
 	int ChosenCategory;
-	cout << "You've chosen to input your Weekly Expenses. Choose a Category to input with: \n (1) - Food \n (2) - Fair \n (3) - School Expenses \n (4) - Entertainment \n (5) - Miscellaneous \n Enter a number:";
+	cout << "You've chosen to input your Weekly Expenses. Choose a Category to input with: \n (1) - Food \n (2) - Fare \n (3) - School Expenses \n (4) - Entertainment \n (5) - Miscellaneous \n Enter a number:";
 	cin >> ChosenCategory;
 	switch (ChosenCategory) {
 	case 1:
 		food();
 		break;
 	case 2:
-		fair();
+		fare();
 		break;
 	case 3:
 		school();
@@ -88,7 +90,7 @@ int InputAllowance() {
 	return 0;
 }
 
-int food() {
+int food(){
 	int foodex;
 	for (int i = 0; i < 7; i++) {
 		cout << "Enter your food expenses in " << week[i] << ":  \n";
@@ -112,13 +114,13 @@ int food() {
 	return 0;
 }
 
-int fair() {
-	int fairex;
+int fare(){
+	int fareex;
 	for (int i = 0; i < 7; i++) {
-		cout << "Enter your fair expenses in " << week[i] << ":  \n";
-		cin >> fairex;
-		fairExpenses[i] = fairex;
-		fairEX += fairExpenses[i];
+		cout << "Enter your fare expenses in " << week[i] << ":  \n";
+		cin >> fareex;
+		fareExpenses[i] = fareex;
+		fareEX += fareExpenses[i];
 	}
 	int Choice2;
 	cout << "Enter expenses for another category? (1 - yes, 0 - no):\n";
@@ -136,7 +138,7 @@ int fair() {
 	return 0;
 }
 
-int school() {
+int school(){
 	int schoolex;
 	for (int i = 0; i < 7; i++) {
 		cout << "Enter your school expenses in " << week[i] << ": \n ";
@@ -160,7 +162,7 @@ int school() {
 	return 0;
 }
 
-int fun() {
+int fun(){
 	int funex;
 	for (int i = 0; i < 7; i++) {
 		cout << "Enter your entertainment expenses in " << week[i] << ": \n ";
@@ -183,7 +185,7 @@ int fun() {
 	}
 	return 0;
 }
-int misc() {
+int misc(){
 	int miscex;
 	for (int i = 0; i < 7; i++) {
 		cout << "Enter your miscellaneous expenses in " << week[i] << ":  "<< endl;
@@ -208,60 +210,60 @@ int misc() {
 }
 
 
-int Vfood() {
+int Vfood(){
 	for (int i = 0; i < 7; i++) {
 		cout << "Your food expenses in " << week[i] << "is " << foodExpenses[i] << endl;
 
 	}
-	cout << "Your total food expenses is " << foodEX;
+	cout << "Your total food expenses is: " << foodEX;
 	return 0;
 }
 
-int Vfair() {
+int Vfare(){
 	for (int i = 0; i < 7; i++) {
-		cout << "Your fair expenses in " << week[i] << "is " << fairExpenses[i] << endl;
+		cout << "Your fare expenses in " << week[i] << "is " << fareExpenses[i] << endl;
 
 	}
-	cout << "Your total fair expenses is " << fairEX;
+	cout << "Your total fare expenses is: " << fareEX;
 	return 0;
 }
 
-int VSchool() {
+int VSchool(){
 	for (int i = 0; i < 7; i++) {
 		cout << "Your school expenses in " << week[i] << "is " << schoolExpenses[i] << endl;
 
 	}
-	cout << "Your total school expenses is " << schoolEX;
+	cout << "Your total school expenses is: " << schoolEX;
 	return 0;
 }
 
-int Vfun() {
+int Vfun(){
 	for (int i = 0; i < 7; i++) {
 		cout << "Your entertainment expenses in " << week[i] << "is " << funExpenses[i] << endl;
 
 	}
-	cout << "Your total fun expenses is " << funEX;
+	cout << "Your total fun expenses is: " << funEX;
 	return 0;
 }
 
-int Vmisc() {
+int Vmisc(){
 	for (int i = 0; i < 7; i++) {
 		cout << "Your miscellaneous expenses in " << week[i] << "is " << miscExpenses[i] << endl;
 
 	}
-	cout << "Your total miscellaneous expenses is " << miscEX;
+	cout << "Your total miscellaneous expenses is: " << miscEX;
 	return 0;
 }
-int ViewExpenses() {
+int ViewExpenses(){
 	int choiceRT;
-	cout << "Choose a category to see your expenses:\n (1) - Food \n (2) - Fair \n (3) - School Expenses \n (4) - Entertainment \n (5) - Miscellaneous \n Enter a number: ";
+	cout << "Choose a category to see your expenses:\n (1) - Food \n (2) - Fare \n (3) - School Expenses \n (4) - Entertainment \n (5) - Miscellaneous \n Enter a number: ";
 	cin >> choiceRT;
 	switch (choiceRT) {
 	case 1:
 		Vfood();
 		break;
 	case 2:
-		Vfair();
+		Vfare();
 		break;
 	case 3:
 		VSchool();
@@ -278,9 +280,9 @@ int ViewExpenses() {
 	return 0;
 }
 
-int RemainingAllowance() {
+int RemainingAllowance(){
 	int TotalExpenses, RemainingAllowance;
-	TotalExpenses = foodEX + fairEX + schoolEX + funEX + miscEX;
+	TotalExpenses = foodEX + fareEX + schoolEX + funEX + miscEX;
 	cout << "The total expenses you spent this week is:" << TotalExpenses << endl;
 	RemainingAllowance = TotalAllowance - TotalExpenses;
 	if (RemainingAllowance > 0) {
@@ -293,10 +295,10 @@ int RemainingAllowance() {
 }
 
 
-int main() {
+int main(){
 	int num1;
 	while (true) {
-		cout<< "Good Day! Welcome to the Weekly Budget Tracker. (To proceed enter the number for your chosen feature!):\n (1) - Input Weekly Allowance \n (2) - Input Weekly Expenses \n (3) - View Weekly Expenses \n (4) - View Remaining Allowance \n Enter the number:";
+		cout<< "Good Day! Welcome to the Weekly Budget Tracker. (To proceed enter the number for your chosen feature!):\n (1) - Input Weekly Allowance \n (2) - Input Weekly Expenses \n (3) - View Weekly Expenses \n (4) - View Remaining Allowance\n (5) - Exit \nEnter the number:";
 		cin >> num1;
 		switch (num1) {
 		case 1:
@@ -315,6 +317,8 @@ int main() {
 			cout << "Exiting program. Have a great day!" << endl;
 			return 0;
 			break;
+		default:
+		    cout << "Invalid choice! Please enter a number between 1 and 5.\n";
 		}
 	}
 	return 0;
